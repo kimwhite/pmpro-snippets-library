@@ -15,26 +15,28 @@
  * https://www.paidmembershipspro.com/create-a-plugin-for-pmpro-customizations/
  */
 
- // Add column header
-function my_pmpro_approvals_list_extra_cols_header_email_confirmation( $theusers ) {
+// Add column header
+function my_pmpro_approvals_list_extra_cols_header_email_confirmation( $the_user ) {
 	?>
 	<th><?php esc_html_e( 'Email Confirmation', 'pmpro-email-confirmation' ); ?></th>
 	<?php
 }
 add_action( 'pmpro_approvals_list_extra_cols_header', 'my_pmpro_approvals_list_extra_cols_header_email_confirmation' );
 
-//Add 'Email Confirmation' status to Approved List Rows
-function my_pmpro_approvals_list_extra_cols_body_email_confirmation( $theuser ) {
+// Add column body
+function my_pmpro_approvals_list_extra_cols_body_email_confirmation( $the_user ) {
 	?>
 	<td>
-		<?php
-		// Show pending if the email confirmation key is set in user meta, otherwise show confirmed.
-		if ( ! empty( $theuser->pmpro_email_confirmation_key ) ) {
-			esc_html_e( 'Pending' );
-		} else {
-			esc_html_e( 'Confirmed' );
-		}
-		?>
+	<?php
+	$email_confirmation_key = get_user_meta( $the_user->ID, 'pmpro_email_confirmation_key', true );
+	if ( empty( $email_confirmation_key ) ) {
+		esc_html_e( 'Not requested' );
+	} elseif ( 'validated' == $email_confirmation_key ) {
+		esc_html_e( 'Validated' );
+	} else {
+		esc_html_e( 'Not validated' );
+	}
+	?>
 	</td>
 	<?php
 }
