@@ -8,6 +8,7 @@
  * layout: snippet
  * collection: misc
  * category: checkout
+ * link: https://www.paidmembershipspro.com/change-the-default-country-of-your-membership-website/
  *
  * You can add this recipe to your site by creating a custom plugin
  * or using the Code Snippets plugin available for free in the WordPress repository.
