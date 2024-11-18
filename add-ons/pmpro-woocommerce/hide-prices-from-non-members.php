@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This recipe hides prices + add to cart from non members in Paid Memberships Pro.
+ * This recipe hides prices + add to cart for non members in Paid Memberships Pro.
  * Requires the PMPro WooCommerce Add-On: https://www.paidmembershipspro.com/add-ons/pmpro-woocommerce/
  * 
  * title: hides prices + add to cart from non-members
