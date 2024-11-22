@@ -12,6 +12,7 @@
  * layout: snippet
  * collection: membership-levels
  * category: trials
+ * link: https://www.paidmembershipspro.com/offer-trial-memberships-that-can-only-be-used-once/
  *
  * You can add this recipe to your site by creating a custom plugin
  * or using the Code Snippets plugin available for free in the WordPress repository.
