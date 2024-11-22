@@ -39,10 +39,24 @@ function my_required_user_fields( $pmpro_required_user_fields ) {
 	unset( $pmpro_required_user_fields['password'] );
 	unset( $pmpro_required_user_fields['password2'] );
 	unset( $pmpro_required_user_fields['bconfirmemail'] );
-	
+
 	return $pmpro_required_user_fields;
 }
-add_filter( 'pmpro_required_user_fields', 'my_required_user_fields', 10, 2);
+add_filter( 'pmpro_required_user_fields', 'my_required_user_fields', 10, 2 );
+
+/**
+ * Auto-generate a username from the email address at checkout, but only on the PMPro checkout page.
+ */
+function simple_checkout_generate_username( $username ) {
+	// Only run if we're on the PMPro checkout page
+	if ( function_exists( 'pmpro_is_checkout' ) && pmpro_is_checkout() ) {
+		if ( empty( $username ) && isset( $_REQUEST['bemail'] ) ) {
+			$username = sanitize_user( current( explode( '@', $_REQUEST['bemail'] ) ) );
+		}
+	}
+	return $username;
+}
+add_filter( 'pre_user_login', 'simple_checkout_generate_username' );
 
 /**
  * Add the required User Fields
@@ -56,16 +70,16 @@ function simple_checkout_email_only_signup_pmpro_init() {
 	// Don't break if PMPro is out of date or not loaded.
 	if ( ! function_exists( 'pmpro_add_user_field' ) ) {
 		return false;
-	} 
-	
+	}
+
 	// Store our field settings in an array.
-	$fields = array();
+	$fields   = array();
 	$fields[] = new PMPro_Field(
 		'bemail',
 		'text',
 		array(
-			'label' => 'Email Address',
-			'profile' => true
+			'label'   => 'Email Address',
+			'profile' => true,
 		)
 	);
 	$fields[] = new PMPro_Field(
