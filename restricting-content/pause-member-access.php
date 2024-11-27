@@ -27,13 +27,11 @@ function my_pmprouf_init_pause_access_new() {
 		return;
 	}
     
-//  pmpro_add_field_group( 'pause_hasaccess', 'Access to Member Content' );
     pmpro_add_field_group( 'Access to Member Content' );
 
-	// Define the field.
-  
-  $fields = array();
-  $fields[] = new PMPro_Field(
+	// Define the field.  
+    $fields = array();
+    $fields[] = new PMPro_Field(
 		'pmpro_paused_user',
 		'checkbox',
 		array(
@@ -44,7 +42,7 @@ function my_pmprouf_init_pause_access_new() {
 	);
 
 	foreach ( $fields as $field ) {
-	 pmpro_add_user_field(
+	    pmpro_add_user_field(
 			'Access to Member Content',
 			$field
 		);
@@ -118,6 +116,7 @@ function paused_member_pmpro_membership_account_filter( $content ) {
 	}
 
 	if ( is_page( $pmpro_pages[ 'account' ] ) && ! empty( $paused_user ) ) {
+        //Change wording to something of your preference
 		$newcontent = __( '<div class="pmpro_content_message"><p>Your membership is paused. Please contact us to reinstate your membership.</p><a href="/contact/">Contact Us</a></div>', 'paid-memberships-pro' );
 		$content = $newcontent . $content;
 	}
