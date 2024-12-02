@@ -41,7 +41,7 @@ function pmprogroupacct_add_sponsored_members_migration_settings() {
 		'pmprogroupacct_sponsored_members_migration_page'
 	);
 }
-add_action( 'admin_menu', 'pmprogroupacct_add_sponsored_members_migration_settings' );
+add_action( 'admin_menu', 'pmprogroupacct_add_sponsored_members_migration_settings', 12 );
 
 /**
  * The Sponsored Members Migration settings page.
