@@ -87,7 +87,7 @@ function simple_checkout_email_only_signup_pmpro_init() {
 		'text',
 		array(
 			'label'   => 'Email Address',
-			'profile' => true,
+			'profile' => true
 		)
 	);
 	$fields[] = new PMPro_Field(
@@ -95,7 +95,7 @@ function simple_checkout_email_only_signup_pmpro_init() {
 		'hidden',
 		array(
 			'label' => '&nbsp;',
-			'value' => '1',
+			'value' => '1'
 		)
 	);
 
