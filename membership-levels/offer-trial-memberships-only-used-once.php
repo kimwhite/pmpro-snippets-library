@@ -12,6 +12,7 @@
  * layout: snippet
  * collection: membership-levels
  * category: trials
+ * link: https://www.paidmembershipspro.com/offer-trial-memberships-that-can-only-be-used-once/
  *
  * You can add this recipe to your site by creating a custom plugin
  * or using the Code Snippets plugin available for free in the WordPress repository.
@@ -37,7 +38,9 @@ function my_pmpro_registration_checks( $value ) {
 
 	global $current_user;
 
-	$level_id = intval( $_REQUEST['level'] );
+	$level = pmpro_getLevelAtCheckout();
+    
+    	$level_id = $level->id;
 
 	if ( $current_user->ID ) {
 		// check if the current user has already used the trial level
