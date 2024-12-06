@@ -1,8 +1,8 @@
 <?php
 /**
- * Stop members from renewing their current membership level.
+ * Stop members with a specific membership level from renewing their current membership.
  *
- * title: Stop members from renewing.
+ * title: Stop members from renewing specific levels.
  * layout: snippet
  * collection: checkout
  * category: renewals
@@ -31,7 +31,7 @@ function stop_members_from_renewing_specific_levels( $okay ) {
 
 	// Specify the level IDs to restrict renewals for.
 	$restricted_levels = array(1, 2, 3); // Replace with your level IDs.
-    
+
 	// Check if the user's current membership level is the same as the one being checked out and is in the restricted levels.
 	if ( pmpro_hasMembershipLevel( $level_id ) && in_array( $level_id, $restricted_levels ) ) {
 		$okay = false;
