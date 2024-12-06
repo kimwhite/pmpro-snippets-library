@@ -32,21 +32,21 @@ function my_pmprouf_init_pause_access_new() {
 	// Define the field.  
     $fields = array();
     $fields[] = new PMPro_Field(
-		'pmpro_paused_user',
-		'checkbox',
-		array(
-			'label'   => 'Pause User',
-			'text'    => 'Deny Access to Member Content',
-			'profile' => 'admins',
-		)
-	);
+        'pmpro_paused_user',
+        'checkbox',
+        array(
+            'label'   => 'Pause User',
+            'text'    => 'Deny Access to Member Content',
+            'profile' => 'admins',
+        )
+    );
 
-	foreach ( $fields as $field ) {
-	    pmpro_add_user_field(
-			'Access to Member Content',
-			$field
-		);
-	}
+    foreach ( $fields as $field ) {
+        pmpro_add_user_field(
+            'Access to Member Content',
+            $field
+        );
+    }
 }
 add_action( 'init', 'my_pmprouf_init_pause_access_new', 10, 1 );
 
