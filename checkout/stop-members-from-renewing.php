@@ -6,7 +6,7 @@
  * layout: snippet
  * collection: checkout
  * category: renewals
- * link: https://www.paidmembershipspro.com/how-to-stop-members-from-renewing-their-membership-level/
+ * link: https://www.paidmembershipspro.com/prevent-membership-renewal/
  *
  * You can add this recipe to your site by creating a custom plugin
  * or using the Code Snippets plugin available for free in the WordPress repository.
