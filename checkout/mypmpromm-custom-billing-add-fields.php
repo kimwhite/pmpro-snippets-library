@@ -16,7 +16,7 @@
 
 function mypmpromm_add_address_fields() {
  // Require PMPro and PMPro Register Helper
- if ( ! defined( 'PMPRO_VERSION' ) || ! defined( 'PMPRORH_VERSION' ) ) {
+ if ( ! defined( 'PMPRO_VERSION' ) ) {
 	 return;
  }
 
@@ -32,7 +32,7 @@ function mypmpromm_add_address_fields() {
  // Define the fields
  $fields = array();
  foreach ( $address_fields as $name => $label ) {
-	 $fields[] = new PMProRH_Field(
+	 $fields[] = new PMPro_Field(
 		 $name,
 		 'text',
 		 array(
@@ -50,7 +50,7 @@ function mypmpromm_add_address_fields() {
  foreach ( $fields as $field ) {
 	 pmprorh_add_registration_field(
 		 'billing_mailing_address', // location on checkout page
-		 $field            // PMProRH_Field object
+		 $field            // PMPro_Field object
 	 );
  }
 }
