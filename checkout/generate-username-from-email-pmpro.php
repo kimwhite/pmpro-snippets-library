@@ -3,7 +3,7 @@
 * Generate a username at PMPro checkout from email for users.
 * includes hiding 'username' field using custom CSS line 67 - 79
 *
-* title: Change PMPro Email Subjects
+* title: Generate a username at PMPro checkout from email for users.
 * layout: snippet
 * collection: username
 * category: checkout
