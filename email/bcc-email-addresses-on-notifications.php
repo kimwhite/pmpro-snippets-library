@@ -9,6 +9,7 @@
  * layout: snippet
  * collection: email
  * category: bcc
+ * link: https://www.paidmembershipspro.com/bcc-additional-email-addresses-on-member-or-admin-notifications/
  *
  * You can add this recipe to your site by creating a custom plugin
  * or using the Code Snippets plugin available for free in the WordPress repository.
@@ -21,6 +22,7 @@ function my_pmpro_email_headers_admin_emails( $headers, $email ) {
 	// BCC emails already going to admin_email.
 	if ( strpos( $email->template, '_admin' ) !== false ) {
 		$headers[] = 'Bcc:' . 'otheremail@domain.com';
+		// $headers[] = 'Bcc:' . 'otheremail@domain.com,two@domain.com,three@domain.com'; //Example with multiple BCC emails
 	}
 
 	return $headers;
