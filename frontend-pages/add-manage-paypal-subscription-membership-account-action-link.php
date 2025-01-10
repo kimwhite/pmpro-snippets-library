@@ -2,7 +2,7 @@
 /**
  * Add a "Manage Subscription at PayPal" link to the Membership Account > Memberships section for PayPal subscriptions.
  *
- * title: Add a "Manage Subscription at PayPal" to Member Action Links
+ * title: Add "Manage Subscription at PayPal" to Member Action Links
  * layout: snippet
  * collection: frontend-pages
  * category: members-links
