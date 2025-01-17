@@ -2,12 +2,14 @@
 /**
  * Assign additional membership levels based on fields at checkout.
  *
- * This recipe requires Paid Memberships Pro and the Multiple Memberships Per User (MMPU) Add On.
+ * This recipe requires Paid Memberships Pro 3.0 or higher.
  * Use this recipe as an example: you must change the field label, key, and membership level IDs to fit your needs.
  * 
  * title: Assign additional membership levels based on fields at checkout.
+ * layout: snippet
  * collection: user-fields
- * category: custom-fields
+ * category: custom-fields, checkout
+ * link: https://www.paidmembershipspro.com/assign-additional-membership-levels-based-on-fields-at-checkout/
  * 
  * You can add this recipe to your site by creating a custom plugin
  * or using the Code Snippets plugin available for free in the WordPress repository.
