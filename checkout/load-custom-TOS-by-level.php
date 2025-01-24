@@ -7,7 +7,7 @@
  * layout: snippet
  * collection: checkout
  * category: tos, levels
- * url: https://www.paidmembershipspro.com/add-credit-card-and-paypal-logos-to-checkout/
+ * link:https://www.paidmembershipspro.com/show-different-terms-service-checkout-based-membership-level/
  * 
  * You can add this recipe to your site by creating a custom plugin
  * or using the Code Snippets plugin available for free in the WordPress repository.
