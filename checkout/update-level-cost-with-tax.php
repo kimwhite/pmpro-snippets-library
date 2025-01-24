@@ -1,9 +1,10 @@
 <?php
 /**
- * Custom tax structure where all levels except level 1 have 7.25% tax if billing state is CA.
+ * This code recipe automatically calculates the tax and adds
+ * it to the level cost text on the checkout page as soon as a 
+ * member selects their billing country and state. 
  *
- * title: Custom tax structure where all levels except level 1 have 7.25% tax if billing state is CA.
- * layout: snippet
+ * title: Update the Level Cost Text Based on Country and State
  * collection: checkout
  * category: tax
  *
@@ -13,38 +14,57 @@
  * https://www.paidmembershipspro.com/create-a-plugin-for-pmpro-customizations/
  */
 
+ function mypmpro_tax_update_script(){
 
-/*
-    Custom Tax Example.
-    - Requires PMPro 1.3.13 or higher.
-    - Leave the tax fields blank in the payment settings.
-    - Level 1 has no tax.
-    - Other levels have 7.25% tax for CA customers only.
-    - We update the price description to include the tax amount.
-*/
+	global $pmpro_levels;
 
-//Adjust the tax
-function my_pmpro_tax( $tax, $values, $order ) {
+	$level = ( isset( $_REQUEST['level'] ) ? $pmpro_levels[$_REQUEST['level']] : '' );
 
-    //only applicable for levels > 1 - remove if this should apply to all levels
-    if( $order->membership_id > 1 ) {
-        if( trim( strtoupper( $order->billing->state ) ) == "CA" ) {
-            $tax = round( (float)$values['price'] * 0.075, 2 );       
-        }
-    }
+	$tax_state = pmpro_getOption( 'tax_state' );
+	$tax_rate = floatval( pmpro_getOption( 'tax_rate' ) );	
 
-    return $tax;
+	?>
+	<script type="text/javascript">
+		
+		jQuery(document).ready(function(){
+
+			jQuery("body").on("change", "#bstate", function(){
+
+				var state = jQuery(this).val();
+
+				if( state === '<?php echo $tax_state; ?>' ){
+					
+					var billing_text = '<?php 
+
+					if( !empty( $tax_rate ) ){
+						$level->initial_payment = $level->initial_payment + ( $level->initial_payment * $tax_rate );
+						$level->billing_amount = $level->billing_amount + ( $level->billing_amount * $tax_rate );
+					}	
+
+					echo pmpro_getLevelCost( $level ); ?>';
+
+					jQuery("#pmpro_level_cost").html( billing_text );
+					jQuery(".pmpro_submit").prepend( billing_text );
+
+				}
+
+			});
+		});
+
+	</script>
+	<?php
 }
-add_filter( "pmpro_tax", "my_pmpro_tax", 10, 3 );
+add_action( 'wp_footer', 'mypmpro_tax_update_script' );
 
-//Adjut the level cost text
-function my_pmpro_level_cost_text( $cost, $level ) {
+function mypmpro_override_tax_text( $translated_text, $text, $domain ){
 
-    //only applicable for levels > 1 - remove if this should apply to all levels
-    if( $level->id > 1 ) {
-        $cost .= " Customers in CA will be charged 7.25% tax.";
-    }
+	if( $text === 'Customers in %1$s will be charged %2$s%% tax.' ){
+		
+		$translated_text = 'Customers in %1$s are automatically charged a %2$s%% tax.';
+	
+	}
 
-    return $cost;
+	return $translated_text;
 }
-add_filter( "pmpro_level_cost_text", "my_pmpro_level_cost_text", 10, 2 );
+add_filter( 'gettext', 'mypmpro_override_tax_text', 10, 3 );
+
