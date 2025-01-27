@@ -24,7 +24,7 @@ function my_pmpro_member_action_links_add_paypal( $pmpro_member_action_links, $l
 		$subscription = $subscriptions[0];
 
 		// Check if the subscription is managed by PayPal.
-		if ( $subscription->get_gateway() === 'paypal' ) {
+		if ( $subscription->get_gateway() === 'paypal_express' ) {
 			$pmpro_member_action_links['paypal'] = sprintf(
 				'<a id="pmpro_actionlink-paypal" href="%s" target="_blank">%s</a>',
 				esc_url( 'https://www.paypal.com/myaccount/autopay/' ),
