@@ -6,7 +6,7 @@
  * layout: snippet
  * collection: pmpro-membership-maps
  * category: custom-fields, maps, profile
- * url: https://www.paidmembershipspro.com/adding-billing-field-support-for-membership-maps/
+ * link: https://www.paidmembershipspro.com/adding-billing-field-support-for-membership-maps/
  *
  * You can add this recipe to your site by creating a custom plugin
  * or using the Code Snippets plugin available for free in the WordPress repository.
