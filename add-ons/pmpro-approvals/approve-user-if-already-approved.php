@@ -8,6 +8,7 @@
  * layout: snippet
  * collection: add-ons
  * category: pmpro-approvals
+ * link: https://www.paidmembershipspro.com/automatically-approve-previously-approved-members/
  *
  * You can add this recipe to your site by creating a custom plugin
  * or using the Code Snippets plugin available for free in the WordPress repository.
@@ -29,7 +30,7 @@ function my_approve_user_if_already_approved( $approved, $user_id, $level_id, $u
 
 	// Okay, check their approval log.
 	$approval_log = get_user_meta( $user_id, 'pmpro_approval_log', true );
-	if ( is_array( $approval_log) && ! empty( $approval_log ) ) {		
+	if ( is_array( $approval_log ) && ! empty( $approval_log ) ) {		
 		$last_entry = end( $approval_log );
 		if ( strpos( $last_entry, 'approved' ) !== false ) {
 			// Previously approved.
