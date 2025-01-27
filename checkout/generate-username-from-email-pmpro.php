@@ -7,7 +7,7 @@
 * layout: snippet
 * collection: username
 * category: checkout
-* url: https://www.paidmembershipspro.com/customizing-usernames-for-your-membership-site/
+* link: https://www.paidmembershipspro.com/customizing-usernames-for-your-membership-site/
 *
 * You can add this recipe to your site by creating a custom plugin
 * or using the Code Snippets plugin available for free in the WordPress repository.
