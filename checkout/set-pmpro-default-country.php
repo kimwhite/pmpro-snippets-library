@@ -1,9 +1,7 @@
 <?php
 /**
  * Use the pmpro_default_country filter to pre-set the dropdown at checkout to your country of choice.
- *
- * Requires the Force First Last Plugin (https://wordpress.org/plugins/force-first-last/)
- *
+ * *
  * title: Change the Default Country of Your Membership Site Checkout.
  * layout: snippet
  * collection: misc
