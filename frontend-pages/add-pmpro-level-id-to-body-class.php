@@ -13,7 +13,6 @@
  * Read this companion article for step-by-step directions on either method.
  * https://www.paidmembershipspro.com/create-a-plugin-for-pmpro-customizations/
  */
-
 function add_pmpro_level_id_to_body_class( $classes ) {
 	global $current_user;
 	if ( function_exists( 'pmpro_hasMembershipLevel' ) && pmpro_hasMembershipLevel() ) {
