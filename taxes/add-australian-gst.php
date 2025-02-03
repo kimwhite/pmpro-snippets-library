@@ -24,91 +24,79 @@
 */ 
 
 //add tax info to cost text. this is enabled if the Australia checkbox is checked.
-function agst_pmpro_tax($tax, $values, $order)
-{  
-	$tax = round((float)$values['price'] * 0.1, 2);
+function agst_pmpro_tax( $tax, $values, $order ) {
+	$tax = round( ( float )$values['price'] * 0.1, 2 );
 	return $tax;
 }
- 
-function agst_pmpro_level_cost_text($cost, $level)
-{
+//add tax info to cost text.
+function agst_pmpro_level_cost_text( $cost, $level ) {
 	//only applicable for levels > 1
-	$cost .= __(' Customers in Australia will be charged a 10% GST.', 'pmpro-australia-gst');
-	
+	$cost .= __( ' Customers in Australia will be charged a 10% GST.', 'pmpro-australia-gst' );
 	return $cost;
 }
-add_filter('pmpro_level_cost_text', 'agst_pmpro_level_cost_text', 10, 2);
+add_filter( 'pmpro_level_cost_text', 'agst_pmpro_level_cost_text', 10, 2 );
  
 //set the default country to Australia
-function agst_pmpro_default_country($country) {
+function agst_pmpro_default_country( $country ) {
 	return 'AU';
 }
-add_filter('pmpro_default_country', 'agst_pmpro_default_country');
+add_filter( 'pmpro_default_country', 'agst_pmpro_default_country' );
  
 //add AU checkbox to the checkout page
-function agst_pmpro_checkout_boxes()
-{
+function agst_pmpro_checkout_boxes() {
 ?>
-<table id='pmpro_pricing_fields' class='pmpro_checkout' width='100%' cellpadding='0' cellspacing='0' border='0'>
-<thead>
-	<tr>
-		<th>
-			<?php _e('Australian Residents', 'pmpro-australia-gst');?>
-		</th>            			
-	</tr>
-</thead>
-<tbody>                
-	<tr>	
-		<td>
-			<div>				
-				<input id='taxregion' name='taxregion' type='checkbox' value='1' <?php if(!empty($_REQUEST['taxregion']) || !empty($_SESSION['taxregion'])) {?>checked='checked'<?php } ?> /> <label for='taxregion' class='pmpro_normal pmpro_label-inline pmpro_clickable'><?php _e('Check this box if your billing address is in Australia.', 'pmpro-australia-gst');?></label>
-			</div>				
-		</td>
-	</tr>
-</tbody>
-</table>
+	<div class='pmpro_card'>
+		<div class='pmpro_card_content'>
+			<legend class='pmpro_form_legend'>
+				<h2 class='pmpro_form_heading pmpro_font-large'>
+					<?php _e( 'Australian Residents', 'pmpro-australia-gst' );?>
+				</h2>
+			</legend>
+			<div id='pmpro_pricing_fields'>
+				<input id='taxregion' name='taxregion' type='checkbox' value='1'
+				<?php if( !empty( $_REQUEST['taxregion'] ) || !empty( $_SESSION['taxregion'] ) ) { ?>
+				checked='checked'<?php } ?> />
+				<label for='taxregion' class='pmpro_normal pmpro_label-inline pmpro_clickable'>
+					<?php _e( 'Check this box if your billing address is in Australia.', 'pmpro-australia-gst' );?>
+				</label>
+			</div>
+		</div>
+	</div>
 <?php
 }
-add_action('pmpro_checkout_boxes', 'agst_pmpro_checkout_boxes');
+add_action( 'pmpro_checkout_boxes', 'agst_pmpro_checkout_boxes' );
  
 //update tax calculation if buyer is Australian
-function agst_region_tax_check()
-{
+function agst_region_tax_check() {
 	//check request and session
-	if(isset($_REQUEST['taxregion']))
-	{
+	if( isset( $_REQUEST['taxregion'] ) ) {
 		//update the session var
-		$_SESSION['taxregion'] = $_REQUEST['taxregion'];	
-		
+		$_SESSION['taxregion'] = $_REQUEST['taxregion'];
+
 		//not empty? setup the tax function
-		if(!empty($_REQUEST['taxregion']))
+		if( !empty( $_REQUEST['taxregion'] ) ) {
 			add_filter('pmpro_tax', 'agst_pmpro_tax', 10, 3);
-	}
-	elseif(!empty($_SESSION['taxregion']))
-	{
+		}
+	} elseif( !empty( $_SESSION['taxregion'] ) ) {
 		//add the filter
-		add_filter('pmpro_tax', 'agst_pmpro_tax', 10, 3);
-	}
-	else
-	{
+		add_filter( 'pmpro_tax', 'agst_pmpro_tax', 10, 3 );
+	} else {
 		//check state and country
-		if(!empty($_REQUEST['bcountry']))
-		{			
+		if( !empty( $_REQUEST['bcountry'] ) ) {
 			$bcountry = trim(strtolower($_REQUEST['bcountry']));
-			if($bcountry == 'au')
-			{
+			if( $bcountry == 'au' ) {
 				//billing address is in AU
-				add_filter('pmpro_tax', 'agst_pmpro_tax', 10, 3);
+				add_filter( 'pmpro_tax', 'agst_pmpro_tax', 10, 3 );
 			}
 		}
 	}
 }
-add_action('init', 'agst_region_tax_check');
+add_action( 'init', 'agst_region_tax_check' );
  
 //remove the taxregion session var on checkout
-function agst_pmpro_after_checkout()
-{
-	if(isset($_SESSION['taxregion']))
+function agst_pmpro_after_checkout() {
+	if( isset( $_SESSION['taxregion'] ) ) {
 		unset($_SESSION['taxregion']);
+	}
 }
-add_action('pmpro_after_checkout', 'agst_pmpro_after_checkout');
+add_action( 'pmpro_after_checkout', 'agst_pmpro_after_checkout' );
