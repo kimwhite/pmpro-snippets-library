@@ -14,43 +14,35 @@
  * https://www.paidmembershipspro.com/create-a-plugin-for-pmpro-customizations/
  */
 
- function mypmpro_tax_update_script(){
+function mypmpro_tax_update_script() {
 
-	global $pmpro_levels;
-
-	$level = ( isset( $_REQUEST['level'] ) ? $pmpro_levels[$_REQUEST['level']] : '' );
-
+	$level = pmpro_getLevelAtCheckout();
 	$tax_state = pmpro_getOption( 'tax_state' );
-	$tax_rate = floatval( pmpro_getOption( 'tax_rate' ) );	
-
+	$tax_rate = floatval( pmpro_getOption( 'tax_rate' ) );
 	?>
 	<script type="text/javascript">
 		
-		jQuery(document).ready(function(){
+		jQuery(document).ready(function($) {
+			const originalBillingText = $("#pmpro_level_cost").html(); // Store the original cost text
 
-			jQuery("body").on("change", "#bstate", function(){
-
-				var state = jQuery(this).val();
-
-				if( state === '<?php echo $tax_state; ?>' ){
+			$("body").on("change", "#bstate", function() {
+				let selectedState = $(this).val();
+				if ( selectedState === '<?php echo $tax_state; ?>' ) {
+					const billingText = `<?php
+						if( !empty( $tax_rate ) ) {
+							$level->initial_payment += ( $level->initial_payment * $tax_rate );
+							$level->billing_amount += ( $level->billing_amount * $tax_rate );
+						}
+						echo pmpro_getLevelCost( $level );
+					?>`;
 					
-					var billing_text = '<?php 
-
-					if( !empty( $tax_rate ) ){
-						$level->initial_payment = $level->initial_payment + ( $level->initial_payment * $tax_rate );
-						$level->billing_amount = $level->billing_amount + ( $level->billing_amount * $tax_rate );
-					}	
-
-					echo pmpro_getLevelCost( $level ); ?>';
-
-					jQuery("#pmpro_level_cost").html( billing_text );
-					jQuery(".pmpro_submit").prepend( billing_text );
-
+					$("#pmpro_level_cost").html( billingText );
+				} else {
+					// Restore original cost when selecting a non-taxable state
+					$("#pmpro_level_cost").html( originalBillingText );
 				}
-
 			});
 		});
-
 	</script>
 	<?php
 }
@@ -58,10 +50,8 @@ add_action( 'wp_footer', 'mypmpro_tax_update_script' );
 
 function mypmpro_override_tax_text( $translated_text, $text, $domain ){
 
-	if( $text === 'Customers in %1$s will be charged %2$s%% tax.' ){
-		
+	if( $text === 'Customers in %1$s will be charged %2$s%% tax.' ) {
 		$translated_text = 'Customers in %1$s are automatically charged a %2$s%% tax.';
-	
 	}
 
 	return $translated_text;
