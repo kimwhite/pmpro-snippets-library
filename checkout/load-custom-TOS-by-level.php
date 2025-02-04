@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Show a Different “Terms of Service” at Checkout Based on Membership Level
  * 
@@ -15,6 +14,7 @@
  * https://www.paidmembershipspro.com/create-a-plugin-for-pmpro-customizations/
  */
 
+
 /**
  * Change the Terms of Service page based on the membership level.
  */
@@ -22,7 +22,7 @@ function my_option_pmpro_tospage( $tospage ) {
 	global $pmpro_level;
 
 	// Check if $pmpro_level is set and is an object
-	if ( ! empty( $pmpro_level ) && isset( $pmpro_level->id ) ) {
+	if ( !empty( $pmpro_level ) && isset( $pmpro_level->id ) ) {
 		if ( $pmpro_level->id == 1 ) {
 			$tospage = 53; // change this
 		} else {
