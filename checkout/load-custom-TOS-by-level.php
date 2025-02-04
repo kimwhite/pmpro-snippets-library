@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Show a Different “Terms of Service” at Checkout Based on Membership Level
  * 
@@ -14,6 +13,7 @@
  * Read this companion article for step-by-step directions on either method.
  * https://www.paidmembershipspro.com/create-a-plugin-for-pmpro-customizations/
  */
+
 
 /**
  * Change the Terms of Service page based on the membership level.
