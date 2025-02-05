@@ -6,7 +6,7 @@
  * layout: snippet
  * collection: add-ons
  * category: pmpro-abandoned-cart-recovery
- * link: https://www.paidmembershipspro.com/remove-lesson-list/
+ * link:
  *
  * You can add this recipe to your site by creating a custom plugin
  * or using the Code Snippets plugin available for free in the WordPress repository.
