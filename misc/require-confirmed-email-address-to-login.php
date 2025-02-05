@@ -4,7 +4,7 @@
  *
  * title: Require Confirmed Email Address to Log In
  * layout: snippet
- * collection: login-logout
+ * collection: misc
  * category: login 
  * link: https://www.paidmembershipspro.com/restrict-user-login-for-members-only/#h-code-recipe-1-restrict-user-login-to-active-members
  *
@@ -19,7 +19,7 @@ function my_pmpro_check_login( $user, $password ) {
 
 	$validated = get_user_meta( $user->ID, "pmpro_email_confirmation_key", true );
 
-	if( $validated != 'validated' && !empty( $validated ) ) {
+	if ( $validated != 'validated' && !empty( $validated ) ) {
 		return new WP_Error( 'user_not_verified', 'User has not validated their email' ); 
 	}
 

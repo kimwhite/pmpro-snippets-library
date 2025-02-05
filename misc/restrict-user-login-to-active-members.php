@@ -4,7 +4,7 @@
  *
  * title: Restrict User Login to Active Members
  * layout: snippet
- * collection: login-logout
+ * collection: misc
  * category: login 
  * link:https://www.paidmembershipspro.com/restrict-user-login-for-members-only/#h-code-recipe-1-restrict-user-login-to-active-members
  *
@@ -14,29 +14,30 @@
  * https://www.paidmembershipspro.com/create-a-plugin-for-pmpro-customizations/
  */
 
- function mypmpro_validate_membership_login( $user, $username, $password ){
+ function my_pmpro_validate_membership_login( $user, $username, $password ) {
 	
-	if( !function_exists( 'pmpro_getMembershipLevelsForUser' ) ){		
+	if ( ! function_exists( 'pmpro_getMembershipLevelsForUser' ) ) {		
 		return $user;
 	}
 	
-    	$user = get_user_by( 'login', $username ); 
+	$user = get_user_by( 'login', $username ); 
 	
-	if( empty( $user ) ) {
+	if ( empty( $user ) ) {
 	   return;
 	}
 
-	if( in_array( 'administrator', $user->roles ) ){
+	if ( in_array( 'administrator', $user->roles ) ) {
 		return $user;
 	}
 
 	$membership_levels = pmpro_getMembershipLevelsForUser( $user->ID );
 
-	if( empty( $membership_levels ) ){ //No membership level assigned - no login allowed
-	return;
+	//No membership level assigned - no login allowed
+	if ( empty( $membership_levels ) ) { 
+		return;
 	}
 
 	return $user;
 
 }
-add_filter( 'authenticate', 'mypmpro_validate_membership_login', 99, 3 );
+add_filter( 'authenticate', 'my_pmpro_validate_membership_login', 99, 3 );

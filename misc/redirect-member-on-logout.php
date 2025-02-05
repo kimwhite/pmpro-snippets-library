@@ -1,5 +1,4 @@
 <?php 
-
 /**
  * Redirect members and non-members on logout to specified pages
  * Learn more at https://www.paidmembershipspro.com/redirect-logout/
