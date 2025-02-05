@@ -13,7 +13,6 @@
  * Read this companion article for step-by-step directions on either method.
  * https://www.paidmembershipspro.com/create-a-plugin-for-pmpro-customizations/
  */
-
 function remove_my_woo_prices( $price, $product ) {
  global $pmprowoo_product_levels;
 
