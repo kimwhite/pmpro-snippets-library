@@ -30,8 +30,8 @@ function requires_membership_pages_columns_content( $column_name, $post_ID ) {
 			 FROM {$wpdb->pmpro_memberships_pages} 
 			 WHERE page_id = '{$post_ID}'" );
 		$protected_levels = array();
-		foreach( $membership_levels as $level ) {
-			if( in_array( $level->id, $post_levels ) ) {
+		foreach ( $membership_levels as $level ) {
+			if ( in_array( $level->id, $post_levels ) ) {
 				$protected_levels[] = $level->name;
 			}
 		}

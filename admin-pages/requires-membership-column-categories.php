@@ -26,12 +26,12 @@ function requires_membership_categories_columns_content( $content, $column_name,
 	if ( $column_name == 'requires_membership' ) {
 	    global $membership_levels, $wpdb;
 		$protected_levels = array();
-		foreach( $membership_levels as $level ) {
+		foreach ( $membership_levels as $level ) {
 				$protectedcategories = $wpdb->get_col(
 					"SELECT category_id 
 					 FROM $wpdb->pmpro_memberships_categories
 					 WHERE membership_id = $level->id" );
-				if( in_array( $term_id, $protectedcategories ) ) {
+				if ( in_array( $term_id, $protectedcategories ) ) {
 					$protected_levels[] = $level->name;
 				}
 		}
