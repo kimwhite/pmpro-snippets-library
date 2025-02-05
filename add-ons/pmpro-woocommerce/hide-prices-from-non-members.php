@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This recipe hides prices + add to cart for non members in Paid Memberships Pro.
  * Requires the PMPro WooCommerce Add-On: https://www.paidmembershipspro.com/add-ons/pmpro-woocommerce/
@@ -19,24 +18,23 @@ function remove_my_woo_prices( $price, $product ) {
  global $pmprowoo_product_levels;
 
 	//no product levels or PMProWC not active
-	if( empty( $pmprowoo_product_levels ) ){
+	if ( empty( $pmprowoo_product_levels ) ) {
 		return '';
-        }
+	}
 
 	//check if the product is a membership level
 	$product_ids = array_keys( $pmprowoo_product_levels );
-	if( !in_array( $product->get_id(), $product_ids ) ) {
+	if ( ! in_array( $product->get_id(), $product_ids ) ) {
 		return '';
-        }
+	}
 
-	//must be a level product
 	return $price;
 }
 
 function hide_prices_for_non_pmpro_members(){
   
-  //if user has a PMPro membership level simply return.
-	if( pmpro_hasMembershipLevel() ){
+ 	//if user has a PMPro membership level simply return.
+	if ( pmpro_hasMembershipLevel() ) {
 		return;
 	}
 
@@ -56,21 +54,19 @@ function hide_prices_for_non_pmpro_members(){
 	//hide the sales badge
 	add_filter('woocommerce_sale_flash', '__return_false');
 }
-
 add_action( 'wp', 'hide_prices_for_non_pmpro_members' );
 
-function move_users_away_from_woo(){
+function my_pmpro_redirect_users_away_from_woo() {
   
-//if user has a PMPro membership level simply return.
-	if( pmpro_hasMembershipLevel() ){
+	//if user has a PMPro membership level simply return.
+	if ( pmpro_hasMembershipLevel() ) {
 		return;
 	}
   
-//if the user ends up on the checkout or cart page, redirect to the home page.
-	if( is_checkout() || is_cart() ){
+	//if the user ends up on the checkout or cart page, redirect to the home page.
+	if ( is_checkout() || is_cart() ) {
 		wp_redirect( home_url() ); //change this to another URL if needed.
 		exit;
 	}
 }
-
-add_action( 'template_redirect', 'move_users_away_from_woo' );
+add_action( 'template_redirect', 'my_pmpro_redirect_users_away_from_woo' );
