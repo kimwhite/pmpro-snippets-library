@@ -6,7 +6,7 @@
  * layout: snippet
  * collection: admin-pages
  * category: admin, categories
- * url: https://www.paidmembershipspro.com/show-post-page-categorys-required-membership-levels-dashboard-views/
+ * link: https://www.paidmembershipspro.com/show-post-page-categorys-required-membership-levels-dashboard-views/
  *
  * You can add this recipe to your site by creating a custom plugin
  * or using the Code Snippets plugin available for free in the WordPress repository.

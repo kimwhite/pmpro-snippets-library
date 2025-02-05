@@ -6,7 +6,7 @@
  * layout: snippet
  * collection: misc
  * category: access
- * url: https://www.paidmembershipspro.com/allow-authors-to-view-their-posts-regardless-of-membership-level/
+ * link: https://www.paidmembershipspro.com/allow-authors-to-view-their-posts-regardless-of-membership-level/
  *
  * You can add this recipe to your site by creating a custom plugin
  * or using the Code Snippets plugin available for free in the WordPress repository.

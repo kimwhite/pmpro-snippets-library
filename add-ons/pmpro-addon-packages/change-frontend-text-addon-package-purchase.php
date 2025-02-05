@@ -6,7 +6,7 @@
  * layout: snippet
  * collection: addons
  * category: pmpro-addon-packages
- * url: https://www.paidmembershipspro.com/change-frontend-text-addon-package-purchase-using-wp-gettext-filter/
+ * link: https://www.paidmembershipspro.com/change-frontend-text-addon-package-purchase-using-wp-gettext-filter/
  *
  * You can add this recipe to your site by creating a custom plugin
  * or using the Code Snippets plugin available for free in the WordPress repository.
