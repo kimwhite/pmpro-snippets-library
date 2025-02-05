@@ -4,7 +4,7 @@
  *
  * title: Custom tax structure where all levels except level 1 have 7.25% tax if billing state is CA.
  * layout: snippet
- * collection: taxes
+ * collection: checkout
  * category: tax, AU
  * link: https://www.paidmembershipspro.com/australian-gst/
  *
@@ -67,36 +67,36 @@ function agst_pmpro_checkout_boxes() {
 add_action( 'pmpro_checkout_boxes', 'agst_pmpro_checkout_boxes' );
  
 //update tax calculation if buyer is Australian
-function agst_region_tax_check() {
+function agst_pmpro_region_tax_check() {
 	//check request and session
-	if( isset( $_REQUEST['taxregion'] ) ) {
+	if ( isset( $_REQUEST['taxregion'] ) ) {
 		//update the session var
 		$_SESSION['taxregion'] = $_REQUEST['taxregion'];
 
 		//not empty? setup the tax function
-		if( !empty( $_REQUEST['taxregion'] ) ) {
+		if ( ! empty( $_REQUEST['taxregion'] ) ) {
 			add_filter('pmpro_tax', 'agst_pmpro_tax', 10, 3);
 		}
-	} elseif( !empty( $_SESSION['taxregion'] ) ) {
+	} elseif ( !empty( $_SESSION['taxregion'] ) ) {
 		//add the filter
 		add_filter( 'pmpro_tax', 'agst_pmpro_tax', 10, 3 );
 	} else {
 		//check state and country
-		if( !empty( $_REQUEST['bcountry'] ) ) {
-			$bcountry = trim(strtolower($_REQUEST['bcountry']));
-			if( $bcountry == 'au' ) {
+		if ( !empty( $_REQUEST['bcountry'] ) ) {
+			$bcountry = trim( strtolower( $_REQUEST['bcountry'] ) );
+			if ( $bcountry == 'au' ) {
 				//billing address is in AU
 				add_filter( 'pmpro_tax', 'agst_pmpro_tax', 10, 3 );
 			}
 		}
 	}
 }
-add_action( 'init', 'agst_region_tax_check' );
+add_action( 'init', 'agst_pmpro_region_tax_check' );
  
 //remove the taxregion session var on checkout
 function agst_pmpro_after_checkout() {
-	if( isset( $_SESSION['taxregion'] ) ) {
-		unset($_SESSION['taxregion']);
+	if ( isset( $_SESSION['taxregion'] ) ) {
+		unset( $_SESSION['taxregion'] );
 	}
 }
 add_action( 'pmpro_after_checkout', 'agst_pmpro_after_checkout' );
