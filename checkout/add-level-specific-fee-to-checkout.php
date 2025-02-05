@@ -1,7 +1,6 @@
 <?php
 /**
  * This recipe will add a percentage-based fee to the initial and recurring value when using Stripe
- * Set your percentage on line 21
  * 
  * title: Add A Percentage Based Fee to Checkout When Using Stripe
  * layout: snippet
